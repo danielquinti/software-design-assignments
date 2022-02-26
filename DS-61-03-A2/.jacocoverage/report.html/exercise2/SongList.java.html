@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SongList.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Assignment_2&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">exercise2</a> &gt; <span class="el_source">SongList.java</span></div><h1>SongList.java</h1><pre class="source lang-java linenums">package exercise2;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class SongList {
+
+    private final List&lt;Song&gt; listOfSongs;
+    private int songCursor;
+    private boolean isPlaying;
+
+<span class="fc" id="L14">    public SongList(List&lt;Song&gt; l) {</span>
+<span class="fc" id="L15">        listOfSongs = l;</span>
+<span class="fc" id="L16">        songCursor = 0;</span>
+<span class="fc" id="L17">        isPlaying = false;</span>
+<span class="fc" id="L18">    }</span>
+
+<span class="fc" id="L20">    public SongList() {</span>
+<span class="fc" id="L21">        listOfSongs = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L22">        songCursor = 0;</span>
+<span class="fc" id="L23">        isPlaying = false;</span>
+<span class="fc" id="L24">    }</span>
+
+    public boolean isEmptySongList() {
+<span class="fc" id="L27">        return this.listOfSongs.isEmpty();</span>
+    }
+
+    public int getSongCursor() {
+<span class="fc" id="L31">        return songCursor;</span>
+    }
+
+    public void setSongCursor(int songCursor) {
+<span class="pc bpc" id="L35" title="1 of 4 branches missed.">        if (songCursor &lt;= listOfSongs.size() &amp;&amp; songCursor &gt;= 0) {</span>
+<span class="fc" id="L36">            this.songCursor = songCursor;</span>
+        } else {
+<span class="fc" id="L38">            throw new IndexOutOfBoundsException(&quot;The cursor must be set to a valid position.&quot;);</span>
+        }
+<span class="fc" id="L40">    }</span>
+
+    public boolean isItPlaying() {
+<span class="fc" id="L43">        return isPlaying;</span>
+    }
+
+    public void addSong(Song mySong, int pos) {
+<span class="pc bpc" id="L47" title="1 of 4 branches missed.">        if (pos &lt;= listOfSongs.size() &amp;&amp; pos &gt;= 0) {</span>
+<span class="fc" id="L48">            listOfSongs.add(pos, mySong);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">            if (pos&lt;=songCursor)</span>
+<span class="fc" id="L50">                nextSong();</span>
+        }
+        else 
+<span class="fc" id="L53">            throw new IndexOutOfBoundsException(&quot;The position must be valid.&quot;);</span>
+<span class="fc" id="L54">    }</span>
+
+    public void addSong(Song mySong) {
+<span class="fc" id="L57">        listOfSongs.add(listOfSongs.size(), mySong);</span>
+<span class="fc" id="L58">    }</span>
+
+    public void removeSong(int pos) {
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (isValidPosition(pos)){</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            if(!listOfSongs.isEmpty()){</span>
+<span class="fc" id="L63">                listOfSongs.remove(pos);</span>
+<span class="fc bfc" id="L64" title="All 4 branches covered.">                if (listOfSongs.isEmpty()||pos==songCursor) {</span>
+<span class="fc" id="L65">                    setSongCursor(0);</span>
+<span class="fc" id="L66">                    isPlaying=false;</span>
+                } 
+                else 
+<span class="fc bfc" id="L69" title="All 2 branches covered.">                    if(songCursor&gt;pos)</span>
+<span class="fc" id="L70">                        previousSong();</span>
+            }
+<span class="fc" id="L72">            else throw new IllegalArgumentException(&quot;The list is empty&quot;);</span>
+        }
+<span class="fc" id="L74">        else throw new IndexOutOfBoundsException(&quot;The position on the list must be valid&quot;);</span>
+<span class="fc" id="L75">    }</span>
+
+    public boolean isValidPosition(int position){
+<span class="fc bfc" id="L78" title="All 4 branches covered.">        return (position&gt;=0)&amp;&amp;(position&lt;=listOfSongs.size());</span>
+    }
+    
+    public void moveSong(int origin, int destination) {
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (isEmptySongList())</span>
+<span class="fc" id="L83">            throw new IllegalArgumentException(&quot;The list is empty.&quot;);</span>
+        else {
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            if (destination != origin) {</span>
+<span class="pc bpc" id="L86" title="1 of 4 branches missed.">                if (isValidPosition(origin)&amp;&amp;isValidPosition(destination)){</span>
+<span class="fc" id="L87">                    Song song =listOfSongs.get(origin);</span>
+<span class="fc" id="L88">                    listOfSongs.remove(song);</span>
+<span class="fc" id="L89">                    listOfSongs.add(destination,song);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">                    if (destination == songCursor) {</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">                        if (destination &gt; origin) {</span>
+<span class="fc" id="L92">                            setSongCursor(songCursor - 1);</span>
+                        } else {
+<span class="fc" id="L94">                            setSongCursor(destination);</span>
+                        }
+<span class="fc bfc" id="L96" title="All 2 branches covered.">                    }else if (origin == getSongCursor()) {</span>
+<span class="fc" id="L97">                        setSongCursor(destination);</span>
+<span class="fc bfc" id="L98" title="All 4 branches covered.">                    } else if ((destination &gt; songCursor) &amp;&amp; (origin &lt; songCursor)) {</span>
+<span class="fc" id="L99">                        setSongCursor(songCursor - 1);</span>
+<span class="pc bpc" id="L100" title="1 of 4 branches missed.">                    } else if ((destination &lt; songCursor) &amp;&amp; (origin &gt; songCursor)) {</span>
+<span class="fc" id="L101">                        setSongCursor(songCursor + 1);</span>
+                    }
+<span class="fc" id="L103">                } else</span>
+<span class="fc" id="L104">                    throw new IndexOutOfBoundsException(&quot;The song cannot be found in the list.&quot;);</span>
+            }
+        }
+<span class="fc" id="L107">    }</span>
+
+    public Song playSong() {
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        if (isEmptySongList()) {</span>
+<span class="fc" id="L111">            throw new IllegalArgumentException(&quot;The list is empty.&quot;);</span>
+        } else {
+<span class="fc" id="L113">            isPlaying = true;</span>
+<span class="fc" id="L114">            return listOfSongs.get(songCursor);</span>
+        }
+    }
+
+    public void nextSong() {
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        if (isEmptySongList()) {</span>
+<span class="fc" id="L120">            throw new IndexOutOfBoundsException(&quot;The list is empty.&quot;);</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        } else if (songCursor == listOfSongs.size() - 1) {</span>
+<span class="fc" id="L122">            songCursor = 0;</span>
+        } else {
+<span class="fc" id="L124">            songCursor++;</span>
+        }
+<span class="fc" id="L126">    }</span>
+
+    public void previousSong() {
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (isEmptySongList()) {</span>
+<span class="fc" id="L130">            throw new IndexOutOfBoundsException(&quot;The list is empty.&quot;);</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        } else if (songCursor == 0) {</span>
+<span class="fc" id="L132">            songCursor = listOfSongs.size() - 1;</span>
+        } else {
+<span class="fc" id="L134">            songCursor--;</span>
+        }
+<span class="fc" id="L136">    }</span>
+
+    public void stopSong() {
+<span class="fc" id="L139">        isPlaying = false;</span>
+<span class="fc" id="L140">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L144">        StringBuilder str = new StringBuilder();</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">        for (int i = 0; i &lt; listOfSongs.size(); i++) {</span>
+<span class="fc" id="L146">            str.append(listOfSongs.get(i).toString());</span>
+<span class="fc" id="L147">            str.append(&quot;\n&quot;);</span>
+        }
+<span class="fc" id="L149">        str.append(songCursor);</span>
+<span class="fc" id="L150">        str.append(&quot;\n&quot;);</span>
+<span class="fc" id="L151">        return str.toString();</span>
+    }
+
+    public void arrange() {
+<span class="fc" id="L155">        stopSong();</span>
+<span class="fc" id="L156">        songCursor = 0;</span>
+<span class="fc" id="L157">        Collections.sort(this.listOfSongs);</span>
+<span class="fc" id="L158">    }</span>
+
+    public void arrange(Comparator&lt;Song&gt; comparator) {
+<span class="fc" id="L161">        isPlaying = false;</span>
+<span class="fc" id="L162">        songCursor = 0;</span>
+<span class="fc" id="L163">        Collections.sort(this.listOfSongs, comparator);</span>
+<span class="fc" id="L164">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

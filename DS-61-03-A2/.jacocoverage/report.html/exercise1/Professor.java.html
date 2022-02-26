@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Professor.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Assignment_2&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">exercise1</a> &gt; <span class="el_source">Professor.java</span></div><h1>Professor.java</h1><pre class="source lang-java linenums">package exercise1;
+
+public class Professor extends Faculty {
+
+    private int numberOfSYT;
+
+    @Override
+    public double salary() {
+<span class="fc" id="L9">        return (super.salary() + 100 * numberOfSYT);</span>
+    }
+
+    public Professor(String name, int age, String id, int numberOfSYT) {
+<span class="fc" id="L13">        super(name, age, id, 8, 37);</span>
+<span class="pc bpc" id="L14" title="1 of 4 branches missed.">        if (numberOfSYT &lt; 0 || numberOfSYT &gt; 6) {</span>
+<span class="fc" id="L15">            throw new IllegalArgumentException();</span>
+        } else {
+<span class="fc" id="L17">            this.numberOfSYT = numberOfSYT;</span>
+        }
+<span class="fc" id="L19">    }</span>
+
+    public int getNumberOfSYT() {
+<span class="fc" id="L22">        return numberOfSYT;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L27">        StringBuilder str = new StringBuilder();</span>
+<span class="fc" id="L28">        str.append(getName());</span>
+<span class="fc" id="L29">        str.append(&quot;(&quot;);</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if (getNumberOfSYT() == 0) {</span>
+<span class="fc" id="L31">            str.append(&quot;Professor&quot;);</span>
+        } else {
+<span class="fc" id="L33">            str.append(&quot;Professor with &quot;);</span>
+<span class="fc" id="L34">            str.append(String.valueOf(getNumberOfSYT()));</span>
+<span class="fc" id="L35">            str.append(&quot; six-year terms&quot;);</span>
+        }
+<span class="fc" id="L37">        str.append(&quot;): &quot;);</span>
+<span class="fc" id="L38">        str.append(salary());</span>
+<span class="fc" id="L39">        return str.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BilliardBall.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;DS-61-03-A1&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">exercise4</a> &gt; <span class="el_source">BilliardBall.java</span></div><h1>BilliardBall.java</h1><pre class="source lang-java linenums">package exercise4;
+
+import static exercise4.BilliardBall.BallType.SOLID;
+import static exercise4.BilliardBall.BallType.STRIPED;
+
+//The enum BilliardBall contains all the balls with their respective number,color and type
+
+<span class="pc" id="L8">public enum BilliardBall {</span>
+<span class="fc" id="L9">        CUEBALL(0,&quot;WHITE&quot;, SOLID),</span>
+<span class="fc" id="L10">        BALL1(1,&quot;YELLOW&quot;, SOLID),</span>
+<span class="fc" id="L11">        BALL2(2,&quot;BLUE&quot;, SOLID),</span>
+<span class="fc" id="L12">        BALL3(3,&quot;RED&quot;, SOLID),</span>
+<span class="fc" id="L13">        BALL4(4,&quot;PURPLE&quot;, SOLID),</span>
+<span class="fc" id="L14">        BALL5(5,&quot;ORANGE&quot;, SOLID),</span>
+<span class="fc" id="L15">        BALL6(6,&quot;GREEN&quot;, SOLID),</span>
+<span class="fc" id="L16">        BALL7(7,&quot;MAROON&quot;, SOLID),</span>
+<span class="fc" id="L17">        BALL8(8,&quot;BLACK&quot;, SOLID),</span>
+<span class="fc" id="L18">        BALL9(9,&quot;YELLOW&quot;, STRIPED),</span>
+<span class="fc" id="L19">        BALL10(10,&quot;BLUE&quot;, STRIPED),</span>
+<span class="fc" id="L20">        BALL11(11,&quot;RED&quot;, STRIPED),</span>
+<span class="fc" id="L21">        BALL12(12,&quot;PURPLE&quot;, STRIPED),</span>
+<span class="fc" id="L22">        BALL13(13,&quot;ORANGE&quot;, STRIPED),</span>
+<span class="fc" id="L23">        BALL14(14,&quot;GREEN&quot;, STRIPED),</span>
+<span class="fc" id="L24">        BALL15(15,&quot;MAROON&quot;, STRIPED);</span>
+    
+<span class="pc" id="L26">        enum BallType{STRIPED, SOLID}</span>
+        
+        
+        private final int number;
+        private final String BallColor;
+        private final BallType BallType;
+        
+<span class="fc" id="L33">        BilliardBall(int number, String BallColor, BallType Balltype){</span>
+<span class="fc" id="L34">            this.number = number;</span>
+<span class="fc" id="L35">            this.BallColor = BallColor;</span>
+<span class="fc" id="L36">            this.BallType = Balltype;</span>
+<span class="fc" id="L37">        }  </span>
+        
+        public int getNumber(){
+<span class="fc" id="L40">            return number;</span>
+        }
+        
+        public String getBallColor(){
+<span class="nc" id="L44">            return BallColor;</span>
+        }
+        
+        public BallType getBallType(){
+<span class="fc" id="L48">            return BallType;</span>
+        }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

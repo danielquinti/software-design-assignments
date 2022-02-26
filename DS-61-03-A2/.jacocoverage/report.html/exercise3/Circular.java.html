@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Circular.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Assignment_2&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">exercise3</a> &gt; <span class="el_source">Circular.java</span></div><h1>Circular.java</h1><pre class="source lang-java linenums">package exercise3;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Circular implements Iterator {
+
+<span class="fc" id="L9">    private int counter = 0;</span>
+    private List&lt;Integer&gt; candidates;
+
+<span class="fc" id="L12">    public Circular(List&lt;Integer&gt; candidates) {</span>
+<span class="fc" id="L13">        this.candidates = candidates;</span>
+<span class="fc" id="L14">    }</span>
+
+
+    @Override
+    public boolean hasNext() {
+<span class="fc bfc" id="L19" title="All 2 branches covered.">        return (candidates.size() &gt; 1);</span>
+    }
+
+    @Override
+    public Integer next() {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">            if (counter&lt;candidates.size()-1)</span>
+<span class="fc" id="L25">                counter++;</span>
+<span class="fc" id="L26">            else counter=0;</span>
+<span class="fc" id="L27">        return candidates.get(counter);</span>
+    }
+        
+    @Override
+    public void remove() {
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if(counter==0)</span>
+<span class="fc" id="L33">            candidates.remove(candidates.size()-1);</span>
+        else 
+<span class="fc" id="L35">            candidates.remove(counter-1);</span>
+<span class="pc bpc" id="L36" title="1 of 4 branches missed.">        if((candidates.size()==2)&amp;&amp;(counter==0))</span>
+<span class="fc" id="L37">            return;</span>
+        else  
+<span class="fc" id="L39">            counter--;</span>
+<span class="fc" id="L40">    }</span>
+
+   
+                  
+            
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

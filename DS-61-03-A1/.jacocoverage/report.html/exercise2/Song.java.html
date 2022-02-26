@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Song.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;DS-61-03-A1&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">exercise2</a> &gt; <span class="el_source">Song.java</span></div><h1>Song.java</h1><pre class="source lang-java linenums">package exercise2;
+
+public final class Song {
+
+    private final String title;
+    private final String author;
+    private final String album;
+    private final String style;
+
+    /**
+     * Constructs a song with the given arguments
+     *
+     * @param title
+     * @param author
+     * @param album
+     * @param style
+     */
+<span class="fc" id="L18">    public Song(String title, String author, String album, String style) {</span>
+<span class="fc" id="L19">        this.title = title;</span>
+<span class="fc" id="L20">        this.author = author;</span>
+<span class="fc" id="L21">        this.album = album;</span>
+<span class="fc" id="L22">        this.style = style;</span>
+<span class="fc" id="L23">    }</span>
+
+    // Getters 
+    public String getTitle() {
+<span class="fc" id="L27">        return title;</span>
+    }
+
+    public String getAuthor() {
+<span class="fc" id="L31">        return author;</span>
+    }
+
+    public String getAlbum() {
+<span class="fc" id="L35">        return album;</span>
+    }
+
+    public String getStyle() {
+<span class="fc" id="L39">        return style;</span>
+    }
+
+    /**
+     * Returns a String representing the song . Consists in concatenating title
+     * , author and album , separated by dashes : &quot; Title - Author - Album &quot;. If
+     * any of the fields is longer than 20 characters , it will be truncated to
+     * 20 characters in order to avoid long Strings .
+     *
+     * @return String representing the song .
+     */
+    @Override
+    public String toString() {
+    /**Concatenation of the attributes Title, Author and Album 
+    avoiding strings longer than 20 characters.*/
+<span class="fc" id="L54">        return this.title.substring(0, Math.min(20, this.title.length())) + &quot; - &quot; + </span>
+<span class="fc" id="L55">                this.author.substring(0, Math.min(20, this.author.length())) + &quot; - &quot; +</span>
+<span class="fc" id="L56">                this.album.substring(0, Math.min(20, this.album.length()));</span>
+    }
+
+    /**
+     * Logical equality between two songs . Two songs are considered equals if
+     * they have the same title and the same author . The album will be ignored
+     * in this comparison ( the same song may appear in compilations ) and the
+     * style (the same song may be classified under different styles ).
+     *
+     * For simplicity , we will assume that two songs are equal if and only if
+     * the Strings for title and author are exactly the same ( the comparison is
+     * case - sensitive ).
+     *
+     * @param song2 Object to be compared with the current object .
+     * @return True if they are equal , false otherwise .
+     */
+    @Override
+    public boolean equals(Object song2) {
+    /*If the classes of the objects that are being compared do not match, they are not equal. 
+    Nor if the compared object is null.*/
+<span class="fc bfc" id="L76" title="All 2 branches covered.">        if (song2 == null) {</span>
+<span class="fc" id="L77">            return false;</span>
+        }
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (getClass() != song2.getClass()) {</span>
+<span class="fc" id="L80">            return false;</span>
+        }
+
+<span class="fc" id="L83">        final Song other = (Song) song2;</span>
+<span class="fc bfc" id="L84" title="All 4 branches covered.">        return this.title.equals(other.title) &amp;&amp; this.author.equals(other.author);</span>
+    }
+
+    /**
+     * Returns a hash code representing the song . Remember that songs that are
+     * considered equal must return the same hash code .
+     *
+     * @return An int representing the hash code for the song .
+     */
+    @Override
+    public int hashCode() {
+<span class="fc" id="L95">        return this.title.hashCode() * 79 + this.author.hashCode();</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

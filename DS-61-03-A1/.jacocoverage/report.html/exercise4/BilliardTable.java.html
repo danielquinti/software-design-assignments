@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BilliardTable.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;DS-61-03-A1&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">exercise4</a> &gt; <span class="el_source">BilliardTable.java</span></div><h1>BilliardTable.java</h1><pre class="source lang-java linenums">package exercise4;
+
+import java.util.ArrayList;
+
+public class BilliardTable {
+<span class="fc" id="L6">private final ArrayList&lt;BilliardBall&gt; pocketed = new ArrayList&lt;&gt;(16);</span>
+<span class="fc" id="L7">private final ArrayList&lt;BilliardBall&gt; table = new ArrayList&lt;&gt;(16);</span>
+
+    /**
+    * Creates a billiard table with all the balls pocketed .
+    */
+    public BilliardTable ()
+<span class="fc" id="L13">    {</span>
+<span class="fc bfc" id="L14" title="All 2 branches covered.">      for (BilliardBall Ball: BilliardBall.values())</span>
+<span class="fc" id="L15">        this.pocketed.add(Ball);</span>
+<span class="fc" id="L16">    }</span>
+    
+    /**
+    * Resets the billiard table with all the balls on the table .
+    */
+    //Placing all the balls in the table and removing them from the pocket
+    public void startGame ()
+    {
+<span class="fc" id="L24">        this.table.addAll(this.pocketed);</span>
+<span class="fc" id="L25">        this.pocketed.removeAll(pocketed);</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+    * If it is a regular ball (1 to 7 or 9 to 15) , the ball is removed from the
+    * table and placed on the triangle rack with all the previously pocketed
+    * balls , in the order they have been pocketed .
+    *
+    * If it is the cue ball , the ball is returned to the table ( unless the game is
+    * over ).
+    *
+    * If it is the 8 ball , then the game is over .
+    *
+    * @param b Billiard ball that is pocketed .
+    * @return The state of the game after the ball has been pocketed .
+    * True if the game is still underway or False if it is not.
+    * Only changes when the pocketed ball is the 8 ball , which
+    * automatically means that the game is over .
+    */
+    public boolean pocketBall (BilliardBall b)
+    {
+<span class="fc bfc" id="L46" title="All 2 branches covered.">       if ((b.getNumber() == 8))</span>
+         {
+<span class="fc" id="L48">            this.pocketed.addAll(this.table);</span>
+<span class="fc" id="L49">            this.table.clear();</span>
+<span class="fc" id="L50">            return false;</span>
+         }
+<span class="fc bfc" id="L52" title="All 2 branches covered.">       if ((b.getNumber() == 0))</span>
+<span class="fc" id="L53">                return true;</span>
+       else
+        {
+<span class="fc" id="L56">            this.pocketed.add(b);</span>
+<span class="fc" id="L57">            this.table.remove(b);</span>
+<span class="fc" id="L58">            return true;</span>
+        }
+    }
+
+    /**
+    * Returns an ArrayList with the balls that are still on the table .
+    * @return An ArrayList with BilliardBall objects .
+    */
+    public ArrayList ballsOnTable ()
+    {
+<span class="fc" id="L68">        return this.table;</span>
+    }
+    
+    /**
+    * Returns an ArrayList with the balls that have been pocketed in the table .
+    * @return An ArrayList with BilliardBall objects .
+    */
+    public ArrayList sunkBalls ()
+    {
+<span class="fc" id="L77">        return this.pocketed;</span>
+    }
+
+    /**
+    * Checks if the game is still underway .
+    * @return True if the game is still underway . False otherwise .
+    */
+    public boolean isGameUnderway ()
+    {
+<span class="fc bfc" id="L86" title="All 2 branches covered.">     return !this.pocketed.contains(BilliardBall.BALL8);</span>
+    }
+    
+    /**
+    * Indicates which player ( solids or stripes ) is winning .
+    * Essentially , you are winning (or have won when the game is over ) if
+    * fewer balls of your type remain on the table compared to the other player .
+    * @return The enumerated value BallType . SOLID if the solids are winning ;
+    * the enumerated value BallType . STRIPED if the stripes are winning ;
+    * or the null value in the case of a tie .
+    */
+    public BilliardBall.BallType getWinner ()
+<span class="fc" id="L98">    {      int i = 0;</span>
+<span class="fc" id="L99">           int j = 0;</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">           for (BilliardBall Ball : pocketed)</span>
+           {
+<span class="fc bfc" id="L102" title="All 2 branches covered.">            if (Ball.getBallType() == BilliardBall.BallType.SOLID)</span>
+<span class="fc" id="L103">            {i = i + 1;}</span>
+<span class="fc" id="L104">            else {j = j + 1;}</span>
+<span class="fc" id="L105">           }</span>
+
+<span class="fc bfc" id="L107" title="All 2 branches covered.">           if (i &gt; j) {return BilliardBall.BallType.SOLID;}</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">           else if (i == j){return null;}</span>
+<span class="fc" id="L109">           else {return BilliardBall.BallType.STRIPED;}</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

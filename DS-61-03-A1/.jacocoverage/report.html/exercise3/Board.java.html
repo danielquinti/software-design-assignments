@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Board.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;DS-61-03-A1&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">exercise3</a> &gt; <span class="el_source">Board.java</span></div><h1>Board.java</h1><pre class="source lang-java linenums">package exercise3;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Represents a chessboard
+ */
+public class Board {
+
+<span class="fc" id="L11">    private Piece[][] Board = new Piece[8][8];</span>
+
+    /**
+     * Constructor for creating a board with the initial configuration .
+     */
+<span class="fc" id="L16">    public Board() {</span>
+<span class="fc" id="L17">        this.Board[0][0] = new Piece(PieceType.ROOK, PieceColor.BLACK);</span>
+<span class="fc" id="L18">        this.Board[0][1] = new Piece(PieceType.KNIGHT, PieceColor.BLACK);</span>
+<span class="fc" id="L19">        this.Board[0][2] = new Piece(PieceType.BISHOP, PieceColor.BLACK);</span>
+<span class="fc" id="L20">        this.Board[0][3] = new Piece(PieceType.QUEEN, PieceColor.BLACK);</span>
+<span class="fc" id="L21">        this.Board[0][4] = new Piece(PieceType.KING, PieceColor.BLACK);</span>
+<span class="fc" id="L22">        this.Board[0][5] = new Piece(PieceType.BISHOP, PieceColor.BLACK);</span>
+<span class="fc" id="L23">        this.Board[0][6] = new Piece(PieceType.KNIGHT, PieceColor.BLACK);</span>
+<span class="fc" id="L24">        this.Board[0][7] = new Piece(PieceType.ROOK, PieceColor.BLACK);</span>
+
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (int i = 0; i &lt; 8; i++) {</span>
+<span class="fc" id="L27">            this.Board[1][i] = new Piece(PieceType.PAWN, PieceColor.BLACK);</span>
+<span class="fc" id="L28">            this.Board[6][i] = new Piece(PieceType.PAWN, PieceColor.WHITE);</span>
+        }
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        for (int i = 2; i &lt; 6; i++) {</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">            for (int j = 0; j &lt; 8; j++) {</span>
+<span class="fc" id="L32">                this.Board[i][j] = null;</span>
+            }
+        }
+
+<span class="fc" id="L36">        this.Board[7][0] = new Piece(PieceType.ROOK, PieceColor.WHITE);</span>
+<span class="fc" id="L37">        this.Board[7][1] = new Piece(PieceType.KNIGHT, PieceColor.WHITE);</span>
+<span class="fc" id="L38">        this.Board[7][2] = new Piece(PieceType.BISHOP, PieceColor.WHITE);</span>
+<span class="fc" id="L39">        this.Board[7][3] = new Piece(PieceType.QUEEN, PieceColor.WHITE);</span>
+<span class="fc" id="L40">        this.Board[7][4] = new Piece(PieceType.KING, PieceColor.WHITE);</span>
+<span class="fc" id="L41">        this.Board[7][5] = new Piece(PieceType.BISHOP, PieceColor.WHITE);</span>
+<span class="fc" id="L42">        this.Board[7][6] = new Piece(PieceType.KNIGHT, PieceColor.WHITE);</span>
+<span class="fc" id="L43">        this.Board[7][7] = new Piece(PieceType.ROOK, PieceColor.WHITE);</span>
+<span class="fc" id="L44">    }</span>
+
+    /**
+     * Restores a preexisting board to the initial configuration .
+     */
+    public void startGame() {
+<span class="fc" id="L50">        Board temp = new Board();</span>
+<span class="fc" id="L51">        this.Board = temp.Board;</span>
+
+<span class="fc" id="L53">    }</span>
+
+    /**
+     * Returns a String with the FEN representation of the board .
+     *
+     * @return String using the FEN notation .
+     */
+    
+    
+    @Override
+    public String toString() {
+<span class="fc" id="L64">        String temp = &quot;&quot;;</span>
+<span class="fc" id="L65">        int count = 0;</span>
+<span class="fc" id="L66">        int i = 0;</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        for (i = 0; i &lt; 64; i++) {</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">            if (this.Board[i / 8][i % 8] == null) {</span>
+<span class="fc" id="L69">                count++;</span>
+<span class="fc bfc" id="L70" title="All 4 branches covered.">                if ((this.Board[(i + 1) / 8][((i + 1) % 8)] != null) || (i % 8 == 7)) {</span>
+<span class="fc" id="L71">                    temp = temp + count;</span>
+                }
+            } else {
+<span class="fc" id="L74">                count = 0;</span>
+<span class="fc" id="L75">                temp = temp + this.Board[i / 8][i % 8].toChar();</span>
+            }
+<span class="fc bfc" id="L77" title="All 4 branches covered.">            if (i % 8 == 7 &amp;&amp; i != 63) {</span>
+<span class="fc" id="L78">                temp = temp + &quot;/&quot;;</span>
+<span class="fc" id="L79">                count = 0;</span>
+            }
+        }
+<span class="fc" id="L82">        return temp;</span>
+    }
+
+    /**
+     * Takes a type of piece as an argument and returns a list of the Position
+     * objects that contain pieces of that type ( black and white ).
+     *
+     * @param piece Chess piece
+     * @return List of Position objects with the positions for the piece that
+     * was passed as an argument .
+     */
+    public List findPieces(PieceType piece) {
+
+<span class="fc" id="L95">        List&lt;Position&gt; findp = new ArrayList&lt;&gt;(16);</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        for (int i = 0; i &lt; 8; i++) {</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">            for (int j = 0; j &lt; 8; j++) {</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">                if ((this.Board[i][j]) == null) {</span>
+<span class="fc" id="L99">                    break;</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">                } else if (this.Board[i][j].getType() == piece) {</span>
+<span class="fc" id="L101">                    Position pos = new Position((char) (j + 97), (char) (56 - i));</span>
+<span class="fc" id="L102">                    findp.add(pos);</span>
+                }
+
+            }
+        }
+<span class="fc" id="L107">        return findp;</span>
+
+    }
+
+    /**
+     * Moves pieces in the Board . Receives an origin Position and a destination
+     * Position . If the destination Position contains a Piece , it will be
+     * captured , placing in its square the piece that is being moved . For
+     * simplicity , the correctness of the move ( according to the rules of the
+     * game ) will not be checked . Nevertheless , the method will throw
+     * exceptions if the origin position does not contain any pieces or if any
+     * of the positions is not valid .
+     *
+     * @param origin Origin position of the piece that is being moved .
+     * @param destination Destination position of the piece that is being moved
+     * .
+     */
+    
+    /*The components of the position are translated into coordinates of the array 
+    to make the move() method more readable*/ 
+    private int rowtoInt(Position p) {
+<span class="fc" id="L128">        return (56 - (int) p.getRow());</span>
+    }
+
+    private int columntoInt(Position p) {
+<span class="fc" id="L132">        return ((int) p.getColumn() - 97);</span>
+    }
+    public void move(Position origin, Position destination) {
+        
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        if ((Board[rowtoInt(origin)][columntoInt(origin)]) == null) {</span>
+<span class="fc" id="L137">            throw new IllegalArgumentException(&quot;There is no piece here.&quot;);</span>
+        } else {
+<span class="fc" id="L139">                Board[rowtoInt(destination)][columntoInt(destination)]</span>
+<span class="fc" id="L140">                        = Board[rowtoInt(origin)][columntoInt(origin)];</span>
+<span class="fc" id="L141">                Board[rowtoInt(origin)][columntoInt(origin)] = null;</span>
+        }
+<span class="fc" id="L143">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
